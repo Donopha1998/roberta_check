@@ -21,9 +21,9 @@ def predict_sentiment(text):
     logits = outputs.logits.detach().cpu().numpy()[0]
     predicted_sentiment = int(logits.argmax(axis=-1))
     probabilities = torch.softmax(outputs.logits, dim=1).detach().cpu().numpy()[0]
-    negative_percentage = round(probabilities[0]*100, 4)
-    positive_percentage = round(probabilities[2]*100, 4)
-    neutral_percentage = round(probabilities[1]*100, 4)
+    negative_percentage = round(probabilities[0], 4)
+    positive_percentage = round(probabilities[2], 4)
+    neutral_percentage = round(probabilities[1], 4)
     return negative_percentage, neutral_percentage, positive_percentage
 
 app = Flask(__name__)
