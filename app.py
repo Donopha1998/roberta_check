@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 tokenizer = AutoTokenizer.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
 model = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/twitter-roberta-base-sentiment")
@@ -27,7 +28,7 @@ def predict_sentiment(text):
     return negative_percentage, neutral_percentage, positive_percentage
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/')
 def hello_world():
